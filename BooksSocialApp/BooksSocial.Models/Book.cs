@@ -7,15 +7,22 @@
 
     public class Book
     {
+        private ICollection<Author> authors;
+        private ICollection<Review> reviews;
+        private ICollection<Rating> ratings;
+        private ICollection<Shelf> shelves;
+        private ICollection<Genre> genres;
+        private ICollection<User> readers;
+
         public Book()
         {
             this.Id = Guid.NewGuid();
-            this.Authors = new HashSet<Author>();
-            this.Reviews = new HashSet<Review>();
-            this.Ratings = new HashSet<Rating>();;
-            this.Shelves = new HashSet<Shelf>();
-            this.Genres = new HashSet<Genre>();
-            this.Readers = new HashSet<User>();
+            this.authors = new HashSet<Author>();
+            this.reviews = new HashSet<Review>();
+            this.ratings = new HashSet<Rating>();
+            this.shelves = new HashSet<Shelf>();
+            this.genres = new HashSet<Genre>();
+            this.readers = new HashSet<User>();
             this.Characters = new List<string>();
         }
 
@@ -29,22 +36,42 @@
 
         public string Isbn { get; set; }
 
+        public int NumberOfPages { get; set; }
+
         public List<string> Characters { get; set; }
 
-       // [Column(TypeName = "binary")]
+        // [Column(TypeName = "binary")]
         public string CoverImage { get; set; }
-            
+
         [Required]
-        public ICollection<Author> Authors { get; set; }
+        public ICollection<Author> Authors
+        {
+            get { return this.authors; }
+        }
 
-        public ICollection<Review> Reviews { get; set; }
+        public ICollection<Review> Reviews
+        {
+            get { return this.reviews; }
+        }
 
-        public ICollection<Rating> Ratings { get; set; }
+        public ICollection<Rating> Ratings
+        {
+            get { return this.ratings; }
+        }
 
-        public ICollection<Shelf> Shelves { get; set; }
+        public ICollection<Shelf> Shelves
+        {
+            get { return this.shelves; }
+        }
 
-        public ICollection<Genre> Genres { get; set; }
+        public ICollection<Genre> Genres
+        {
+            get { return this.genres; }
+        }
 
-        public ICollection<User> Readers { get; set; } 
+        public ICollection<User> Readers
+        {
+            get { return this.readers; }
+        }
     }
 }

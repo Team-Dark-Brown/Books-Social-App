@@ -7,11 +7,14 @@
     {
         public Review()
         {
-            this.Id = new Guid();
+            this.Id = Guid.NewGuid();
         }
 
         [Key]
         public Guid Id { get; set; }
+
+        [Required]
+        public DateTime CreatedOn { get; set; }
 
         [Required]
         public virtual Book Book { get; set; }
