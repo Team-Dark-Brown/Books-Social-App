@@ -6,14 +6,14 @@
     using BooksSocial.Data;
     using BooksSocial.Models;
 
-    public class UsersController : BaseApiController
+    public class UserController : BaseApiController
     {
-        public UsersController()
+        public UserController()
         {
 
         }
 
-        public UsersController(IBooksSocialData data)
+        public UserController(IBooksSocialData data)
             : base(data)
         {
 

@@ -7,7 +7,7 @@
     {
         public Genre()
         {
-            this.Id = new Guid();
+            this.Id = Guid.NewGuid();
         }
 
         [Key]
