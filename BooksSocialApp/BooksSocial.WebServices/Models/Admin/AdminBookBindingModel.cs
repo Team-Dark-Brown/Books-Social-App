@@ -1,18 +1,15 @@
-﻿using BooksSocial.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-
-namespace BooksSocial.WebServices.Models.Admin
+﻿namespace BooksSocial.WebServices.Models.Admin
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+
     public class AdminBookBindingModel
     {
         public AdminBookBindingModel()
         {
-
         }
+
         [Required]
         public string Title { get; set; }
 

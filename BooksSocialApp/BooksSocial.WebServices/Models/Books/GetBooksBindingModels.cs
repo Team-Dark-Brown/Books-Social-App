@@ -1,4 +1,4 @@
-﻿namespace BooksSocial.Web.Models.Ads
+﻿namespace BooksSocial.Web.Models.Books
 {
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -13,5 +13,5 @@
 
         public Guid? GenreId { get; set; }
 
-        }
+    }
 }

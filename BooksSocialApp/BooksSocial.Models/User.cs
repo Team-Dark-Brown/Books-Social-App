@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Security.Claims;
     using System.Threading.Tasks;
+    using System.ComponentModel.DataAnnotations.Schema;
 
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
@@ -12,14 +13,14 @@
         private ICollection<Book> books;
         private ICollection<Shelf> shelves;
         private ICollection<Author> favoriteAuthors;
-        private ICollection<User> friends;
 
         public User()
         {
             this.books = new HashSet<Book>();
             this.shelves = new HashSet<Shelf>();
             this.favoriteAuthors = new HashSet<Author>();
-            this.friends = new HashSet<User>();
+            this.Users = new HashSet<User>();
+            this.Friends = new HashSet<User>();
         }
 
         //[Column(TypeName = "binary")]
@@ -37,11 +38,9 @@
             set { this.shelves = value; }
         }
 
-        public ICollection<User> Friends
-        {
-            get { return this.friends; }
-            set { this.friends = value; }
-        }
+        [InverseProperty("Friends")]
+        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<User> Friends { get; set; }
 
         public ICollection<Author> FavoriteAuthors
         {

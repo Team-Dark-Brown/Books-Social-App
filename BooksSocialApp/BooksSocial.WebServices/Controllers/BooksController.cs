@@ -1,28 +1,24 @@
 ﻿namespace BooksSocial.WebServices.Controllers
 {
+    using System;
     using System.Linq;
+    using System.Collections.Generic;
     using System.Web.Http;
 
     using BooksSocial.Data;
     using BooksSocial.Models;
-    using System;
-    using System.Collections;
-    using System.Collections.Generic;
-    using BooksSocial.Web.Models.Ads;
+    using BooksSocial.Web.Models.Books;
 
     public class BooksController : BaseApiController
     {
         public BooksController()
         {
-
         }
 
         public BooksController(IBooksSocialData data)
             : base(data)
         {
-
         }
-
 
         [HttpGet]
         [Route("api/books")]
@@ -48,12 +44,10 @@
 
         }
 
-
         [HttpGet]
         [Route("api/books/{id}")]
         public IHttpActionResult GetBooksByID(Guid id)
         {
-
             var book = Data.Book.Find(id);
             if (book == null)
             {
