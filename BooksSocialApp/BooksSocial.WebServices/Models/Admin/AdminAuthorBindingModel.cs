@@ -11,6 +11,16 @@
         }
 
         [Required]
+        public string FirstName { get; set; }
+
+        [Required]
+        public string LastName { get; set; }
+
+        public string Picture { get; set; }
+
+        public string Website { get; set; }
+
+        [Required]
         public string Information { get; set; }
     }
   
