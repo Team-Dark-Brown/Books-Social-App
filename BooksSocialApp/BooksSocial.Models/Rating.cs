@@ -14,6 +14,10 @@
         public Guid Id { get; set; }
 
         [Required]
+        [Range(1,5)]
+        public int Value { get; set; }
+
+        [Required]
         public DateTime CreatedOn { get; set; }
 
         [Required]
