@@ -333,7 +333,8 @@ namespace BooksSocial.WebServices.Controllers
             var user = new User()
             {
                 UserName = model.Username, 
-                Email = model.Email
+                Email = model.Email,
+                PhoneNumber = model.Phone
             };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);

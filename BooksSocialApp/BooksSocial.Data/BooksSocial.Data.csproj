@@ -53,8 +53,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BooksSocialDbContext .cs" />
-    <Compile Include="BooksSocialData.cs" />
-    <Compile Include="IBooksSocialData.cs" />
+    <Compile Include="Data\BooksSocialData.cs" />
+    <Compile Include="Data\IBooksSocialData.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\GenericRepository.cs" />

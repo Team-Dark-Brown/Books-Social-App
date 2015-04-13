@@ -8,7 +8,7 @@
     {
         public Shelf()
         {
-            this.Id = new Guid();
+            this.Id = Guid.NewGuid();
             this.Books = new HashSet<Book>();
         }
 

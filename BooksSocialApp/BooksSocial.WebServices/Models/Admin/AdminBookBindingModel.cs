@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
+    using BooksSocial.Models;
+
     public class AdminBookBindingModel
     {
         public AdminBookBindingModel()
@@ -16,6 +18,8 @@
         public string Resume { get; set; }
 
         public string Isbn { get; set; }
+
+        public int NumberOfPages { get; set; }
 
         public List<string> Characters { get; set; }
 

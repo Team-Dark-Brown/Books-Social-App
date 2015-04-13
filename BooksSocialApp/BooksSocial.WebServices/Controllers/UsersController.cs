@@ -12,13 +12,11 @@
     {
         public UserController()
         {
-
         }
 
         public UserController(IBooksSocialData data)
             : base(data)
         {
-
         }
 
 
