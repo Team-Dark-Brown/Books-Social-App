@@ -15,6 +15,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using BooksSocial.WebServices.Models;
+using BooksSocial.WebServices.Models.User;
 using BooksSocial.WebServices.Providers;
 using BooksSocial.WebServices.Results;
 
@@ -329,7 +330,11 @@ namespace BooksSocial.WebServices.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = new User() { UserName = model.Email, Email = model.Email };
+            var user = new User()
+            {
+                UserName = model.Username, 
+                Email = model.Email
+            };
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
