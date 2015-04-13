@@ -8,7 +8,7 @@
     public class Author
     {
         private ICollection<Book> books;
-        private ICollection<User> fans; 
+        private ICollection<User> fans;
 
         public Author()
         {
@@ -42,5 +42,6 @@
         {
             get { return this.fans; }
         }
+
     }
 }

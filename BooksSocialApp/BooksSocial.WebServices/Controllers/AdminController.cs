@@ -49,7 +49,7 @@
 
             if (author == null)
             {
-                return BadRequest("Genre not found");
+                return BadRequest("Author not found");
             }
 
             Data.Author.Delete(author);
@@ -90,6 +90,12 @@
             var genre = new Genre();
             genre.Name = model.Name;
 
+            foreach (var bookId in model.Books)
+            {
+                var book = Data.Book.Find(bookId);
+                genre.Books.Add(book);
+            }
+
             Data.Genre.Add(genre);
             Data.SaveChanges();
             return this.StatusCode(System.Net.HttpStatusCode.Accepted);
@@ -125,6 +131,7 @@
             {
                 return Ok("Genre not found");
             }
+
             genre.Name = model.Name;
             Data.Genre.Update(genre);
             Data.SaveChanges();
