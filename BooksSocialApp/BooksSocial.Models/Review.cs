@@ -14,7 +14,7 @@
         public Guid Id { get; set; }
 
         [Required]
-        public string Review { get; set; }
+        public string Text { get; set; }
 
         [Required]
         public DateTime CreatedOn { get; set; }
