@@ -16,7 +16,6 @@
         [Required]
         public string Text { get; set; }
 
-        [Required]
         public DateTime CreatedOn { get; set; }
 
         [Required]

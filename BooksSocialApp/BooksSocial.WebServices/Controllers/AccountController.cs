@@ -15,7 +15,7 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using BooksSocial.WebServices.Models;
-using BooksSocial.WebServices.Models.User;
+using BooksSocial.WebServices.Models.Users;
 using BooksSocial.WebServices.Providers;
 using BooksSocial.WebServices.Results;
 

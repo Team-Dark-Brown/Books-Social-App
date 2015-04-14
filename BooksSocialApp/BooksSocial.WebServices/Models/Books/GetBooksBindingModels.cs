@@ -1,7 +1,6 @@
 ﻿namespace BooksSocial.Web.Models.Books
 {
     using System;
-    using System.ComponentModel.DataAnnotations;
 
     public class GetBooksBindingModel
     {

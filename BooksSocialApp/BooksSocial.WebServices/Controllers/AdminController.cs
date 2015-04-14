@@ -133,6 +133,12 @@
             }
 
             genre.Name = model.Name;
+            foreach (var bookId in model.Books)
+            {
+                var book = Data.Book.Find(bookId);
+                genre.Books.Add(book);
+            }
+
             Data.Genre.Update(genre);
             Data.SaveChanges();
             return Ok("Genre updated successfully.");

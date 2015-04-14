@@ -1,13 +1,14 @@
-﻿namespace BooksSocial.WebServices.Controllers
+﻿using System;
+using BooksSocial.WebServices.Models.Users;
+
+namespace BooksSocial.WebServices.Controllers
 {
     using System.Linq;
     using System.Web.Http;
 
     using BooksSocial.Data;
     using BooksSocial.Models;
-    using System;
 
-    [RoutePrefix("api/User")]
     public class UserController : BaseApiController
     {
         public UserController()
@@ -19,7 +20,6 @@
         {
         }
 
-
         [HttpGet]
         [Route("api/users")]
         public IHttpActionResult GetUsersCount()
@@ -29,52 +29,39 @@
             return this.Ok(count);
         }
 
-        [Route("Books/review")]
-        public IHttpActionResult addBookReview([FromUri]Guid bookId, [FromBody]string review)
+        [HttpPost]
+        [Route("api/users/reviews")]
+        public IHttpActionResult AddReview([FromBody]UserReviewBindingModel model)
         {
-            var rate = new Review();
-            rate.Book = Data.Book.Find(bookId);
-            rate.User = Data.User.All().FirstOrDefault(u => u.UserName == User.Identity.Name);
-            rate.CreatedOn = new DateTime();
-            //rate.text = review;
-            Data.Review.Add(rate);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = Data.User.All().FirstOrDefault(u => u.Id == model.UserId.ToString());
+            if (user == null)
+            {
+                return BadRequest("User not found.");
+            }
+
+            var book = Data.Book.All().FirstOrDefault(b => b.Id == model.BookId);
+            if (book == null)
+            {
+                return BadRequest("Book not found.");
+            }
+
+            var review = new Review()
+            {
+                Book = book,
+                User = user,
+                CreatedOn = DateTime.Now,
+                Text = model.Text
+            };
+
+            Data.Review.Add(review);
             Data.SaveChanges();
-            return Ok("Rated successfully.");
+            return this.StatusCode(System.Net.HttpStatusCode.Accepted);
         }
-
-        [Route("Books/rate")]
-        public IHttpActionResult addBookRating([FromUri]Guid bookId, [FromBody]int rating)
-        {
-            var rate = new Rating();
-            rate.Book = Data.Book.Find(bookId);
-            rate.User = Data.User.All().FirstOrDefault(u => u.UserName == User.Identity.Name);
-            rate.CreatedOn = new DateTime();
-            //rate.value = rating;
-            Data.Rating.Add(rate);
-            Data.SaveChanges();
-            return Ok("Rated successfully.");
-        }
-
-        //public IHttpActionResult addBookToRead()
-        //{
-        //    //TODO
-        //}
-
-        //public IHttpActionResult markBookAsRead()
-        //{
-        //    //TODO
-        //}
-
-        //public IHttpActionResult markBookAsReading()
-        //{
-        //    //TODO
-        //}
-
-        //public IHttpActionResult getBooks()
-        //{
-        //    //TODO
-        //}
-
 
     }
 }
