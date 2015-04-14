@@ -23,7 +23,6 @@
             this.shelves = new HashSet<Shelf>();
             this.genres = new HashSet<Genre>();
             this.readers = new HashSet<User>();
-            this.Characters = new List<string>();
         }
 
         [Key]
@@ -37,8 +36,6 @@
         public string Isbn { get; set; }
 
         public int NumberOfPages { get; set; }
-
-        public List<string> Characters { get; set; }
 
         // [Column(TypeName = "binary")]
         public string CoverImage { get; set; }

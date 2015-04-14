@@ -46,12 +46,8 @@
                 UserId = r.User.Id.ToString()
             });
 
-            if (review == null)
-            {
-                return this.BadRequest("Review not found!");
-            }
-
             return this.Ok(review);
         }
+
     }
 }

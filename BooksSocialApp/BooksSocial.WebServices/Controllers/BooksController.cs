@@ -22,25 +22,21 @@
 
         [HttpGet]
         [Route("api/books")]
-        public IList<Book> GetAllBooks([FromUri]GetBooksBindingModel model)
+        public IHttpActionResult GetAllBooks([FromUri] GetBooksBindingModel model)
         {
-            
-            var books = Data.Book.All().ToList();
-            if (model == null)
+
+            var books = Data.Book.All().Select(b => new
             {
-                return books;
-            }
-            if (model.AuthorId.HasValue) 
-            {
-                var author = this.Data.Author.All().FirstOrDefault(a => a.Id == model.AuthorId);
-                books = books.Where(b => b.Authors.Contains(author)).ToList();
-            }
-            if (model.GenreId.HasValue)
-            {
-                var genre = this.Data.Genre.All().FirstOrDefault(g => g.Id == model.GenreId);
-                books = books.Where(b => b.Genres.Contains(genre)).ToList();
-            }
-            return books;
+                Id = b.Id,
+                CoverImage = b.CoverImage,
+                Title = b.Title,
+                Resume = b.Resume,
+                Isbn = b.Isbn,
+                NumberOfPages = b.NumberOfPages,
+                Authors = b.Authors
+            });
+
+            return Ok(books);
 
         }
 

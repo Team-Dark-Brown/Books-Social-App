@@ -162,11 +162,6 @@
                 book.Authors.Add(author);
             }
 
-            if (model.Characters != null)
-            {
-                book.Characters = model.Characters;
-            }
-
             if (model.CoverImage != null)
             {
                 book.CoverImage = model.CoverImage;
@@ -231,11 +226,6 @@
             {
                 var author = Data.Author.Find(authorId);
                 book.Authors.Add(author);
-            }
-
-            if (model.Characters != null)
-            {
-                book.Characters = model.Characters;
             }
 
             if (model.CoverImage != null)
