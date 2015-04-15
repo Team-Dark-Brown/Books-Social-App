@@ -37,17 +37,21 @@ namespace BooksSocial.Data.Migrations
             var roleManager = new RoleManager<IdentityRole>(roleStore);
 
             roleManager.Create(new IdentityRole { Name = "Admin" });
+            var tempUser = db.Users.Where(u => u.UserName == "admin").FirstOrDefault();
 
-            var user = new User { UserName = "admin", Email = "admin@gmail.com", PasswordHash = new PasswordHasher().HashPassword("#Lo6omie") };
-            db.Users.Add(user);
-            db.SaveChanges();
-            string userId = db.Users.Where(x => x.Email == "admin@gmail.com" && string.IsNullOrEmpty(x.SecurityStamp))
-                .Select(x => x.Id).FirstOrDefault();
+            if (tempUser == null)
+            {
+                var user = new User { UserName = "admin", Email = "admin@gmail.com", PasswordHash = new PasswordHasher().HashPassword("#Lo6omie") };
+                db.Users.Add(user);
+                db.SaveChanges();
+                string userId = db.Users.Where(x => x.Email == "admin@gmail.com" && string.IsNullOrEmpty(x.SecurityStamp))
+                    .Select(x => x.Id).FirstOrDefault();
 
-            if (!string.IsNullOrEmpty(userId)) userManager.UpdateSecurityStamp(userId);
+                if (!string.IsNullOrEmpty(userId)) userManager.UpdateSecurityStamp(userId);
 
-            userManager.AddToRole(db.Users.Where(u => u.UserName == user.UserName).Select(i => i.Id).FirstOrDefault(), "Admin");
-            
+                userManager.AddToRole(db.Users.Where(u => u.UserName == user.UserName).Select(i => i.Id).FirstOrDefault(), "Admin");
+            }
+        
         }
     }
 }
