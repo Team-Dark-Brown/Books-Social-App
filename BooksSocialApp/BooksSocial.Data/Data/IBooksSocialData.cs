@@ -24,6 +24,8 @@ namespace BooksSocial.Data
 
         IRepository<Shelf> Shelf { get; }
 
+        IRepository<FriendRequest> FriendRequest { get; }
+
         int SaveChanges();
     }
 }

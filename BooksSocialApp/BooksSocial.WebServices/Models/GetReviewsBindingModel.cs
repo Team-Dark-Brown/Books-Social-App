@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace BooksSocial.WebServices.Models
+﻿namespace BooksSocial.WebServices.Models
 {
+    using System;
+
     public class GetReviewsBindingModel
     {
         public GetReviewsBindingModel()

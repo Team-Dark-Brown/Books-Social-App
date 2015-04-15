@@ -9,7 +9,7 @@
 
     public class BooksSocialData : IBooksSocialData
     {
-        private DbContext context;
+        public DbContext context;
 
         private IDictionary<Type, object> repositories;
 
@@ -52,6 +52,11 @@
         public IRepository<Shelf> Shelf
         {
             get { return this.GetRepository<Shelf>(); }
+        }
+
+        public IRepository<FriendRequest> FriendRequest
+        {
+            get { return this.GetRepository<FriendRequest>(); }
         }
 
         public int SaveChanges()

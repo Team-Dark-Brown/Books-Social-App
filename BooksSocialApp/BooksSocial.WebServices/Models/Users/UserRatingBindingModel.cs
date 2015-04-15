@@ -2,7 +2,6 @@
 {
     using System;
     using System.ComponentModel.DataAnnotations;
-    using BooksSocial.Models;
 
     public class UserRatingBindingModel
     {
@@ -14,10 +13,6 @@
 
         [Required]
         public Guid BookId { get; set; }
-
-
-        [Required]
-        public Guid UserId { get; set; }
 
     }
 }

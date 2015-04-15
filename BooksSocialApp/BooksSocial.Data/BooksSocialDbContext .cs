@@ -33,5 +33,7 @@
 
         public IDbSet<Shelf> Shelves { get; set; }
 
+        public IDbSet<FriendRequest> FriendRequests { get; set; } 
+
     }
 }

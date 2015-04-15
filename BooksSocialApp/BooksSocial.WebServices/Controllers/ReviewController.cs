@@ -68,21 +68,6 @@
             return this.Ok(reviews);
         }
 
-        [HttpGet]
-        [Route("api/reviews/getreviewsbyuser/{id}")]
-        public IHttpActionResult GetReviewsByUser(Guid id, [FromUri]GetReviewsBindingModel model)
-        {
-            var reviews = Data.Review.All()
-                .Where(r => r.User.Id == id.ToString())
-                .Select(r => new
-                    {
-                        Id = r.Id,
-                        Text = r.Text,
-                        CreatedOn = r.CreatedOn,
-                        BookId = r.Book.Id
-                    });
-
-            return this.Ok(reviews);
-        }
+        
     }
 }
