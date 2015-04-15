@@ -1,21 +1,23 @@
-<div class="reading-list-list">
-	<div class="reading-list" ng-repeat="list in readLists">
-		<div class="reading-list-name">{{list.name}}</div>
-		<div class="reading-list-books">
-			<div class="book" ng-repeat="book in list.books">
-				<div class="book-isbn">{{book.Isbn}}</div>
-				<img src="{{book.ContentImage}}" alt="" class="book-image">
-				<div class="book-name">{{book.Name}}</div>
-				<div class="book-actions">
-					<button class="btn">Mark as Read</button>
-					<button class="btn">Remove</button>
-					<button class="btn">Buy</button>
+<div class="col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+	<div class="reading-list-list">
+		<div class="reading-list" ng-repeat="list in readLists">
+			<div class="reading-list-name">{{list.name}}</div>
+			<div class="reading-list-books">
+				<div class="book" ng-repeat="book in list.books">
+					<div class="book-isbn">{{book.Isbn}}</div>
+					<img src="{{book.ContentImage}}" alt="" class="book-image">
+					<div class="book-name">{{book.Name}}</div>
+					<div class="book-actions">
+						<button class="btn">Mark as Read</button>
+						<button class="btn">Remove</button>
+						<button class="btn">Buy</button>
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="reading-list-actions">
-			<button class="btn-default">Edit</button>
-			<button class="btn-default">Delete</button>
+			<div class="reading-list-actions">
+				<button class="btn-default">Edit</button>
+				<button class="btn-default">Delete</button>
+			</div>
 		</div>
 	</div>
 </div>

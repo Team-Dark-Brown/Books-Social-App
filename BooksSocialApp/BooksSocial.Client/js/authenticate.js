@@ -18,6 +18,11 @@ app.service('AuthenticateService', ['$http', '$rootScope', 'baseServiceUrl', fun
 	
 		self.broadcastUser();
 		self.broadcastAdmin();
+
+		resource = $http.post(baseServiceUrl + "Account/Logout")
+		.then(function(response){
+			console.log("logged out");
+		});
 	};
 	
 	this.registerUser = function(user, email, pass, confimPass, phone){
@@ -34,6 +39,7 @@ app.service('AuthenticateService', ['$http', '$rootScope', 'baseServiceUrl', fun
 			self.broadcastUser();
 		});
 	};
+
 
 	this.broadcastUser = function(){
 		$rootScope.$broadcast('AuthenticationUser', {key: 'user', newvalue: sessionStorage.username});
