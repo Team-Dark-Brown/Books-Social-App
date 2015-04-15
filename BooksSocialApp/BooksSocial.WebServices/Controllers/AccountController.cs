@@ -336,9 +336,22 @@ namespace BooksSocial.WebServices.Controllers
                 Email = model.Email,
                 PhoneNumber = model.Phone
             };
+            
+            var readShelf = new Shelf()
+            {
+                Name = "read"
+            };
+
+            var toReadShelf = new Shelf()
+            {
+                Name = "to-read"
+            };
+
+            user.Shelves.Add(readShelf);
+            user.Shelves.Add(toReadShelf);
 
             IdentityResult result = await UserManager.CreateAsync(user, model.Password);
-
+            
             if (!result.Succeeded)
             {
                 return GetErrorResult(result);

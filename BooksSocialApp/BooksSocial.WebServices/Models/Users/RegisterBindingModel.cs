@@ -1,4 +1,6 @@
-﻿namespace BooksSocial.WebServices.Models.Users
+﻿using System.Collections.Generic;
+
+namespace BooksSocial.WebServices.Models.Users
 {
     using System.ComponentModel.DataAnnotations;
 
@@ -25,5 +27,6 @@
 
         [Display(Name = "Phone")]
         public string Phone { get; set; }
+
     }
 }
