@@ -61,11 +61,34 @@
                     .Select(b => new
                     {
                         Id = b.Id,
-                        Title = b.Title
+                        Title = b.Title,
+                        Resume = b.Resume,
+                        CoverImage = b.CoverImage,
+                        Isbn = b.Isbn,
+                        NumberOfPages = b.NumberOfPages
                     }));
 
             return Ok(books);
         }
 
+        [HttpGet]
+        [Route("api/books/getbygenre/{id}")]
+        public IHttpActionResult GetBooksByGenre(Guid id)
+        {
+            var books = Data.Genre.All()
+                .Where(g => g.Id == id)
+                .Select(g => g.Books
+                    .Select(b => new
+                    {
+                        Id = b.Id,
+                        Title = b.Title,
+                        Resume = b.Resume,
+                        CoverImage = b.CoverImage,
+                        Isbn = b.Isbn,
+                        NumberOfPages = b.NumberOfPages
+                    }));
+
+            return Ok(books);
+        }
     }
 }

@@ -21,6 +21,7 @@
         {
         }
 
+        [HttpPost]
         [Route("Authors")]
         public IHttpActionResult AddAuthor([FromBody]AdminAuthorBindingModel model)
         {
@@ -42,6 +43,7 @@
             return Ok("The author is added successfully.");
         }
 
+        [HttpDelete]
         [Route("Authors/{id}")]
         public IHttpActionResult DeleteAuthor(Guid id)
         {
@@ -191,6 +193,8 @@
                     book.Genres.Add(genre);
                 }
             }
+
+            book.NumberOfPages = model.NumberOfPages;
 
             Data.Book.Add(book);
             Data.SaveChanges();
