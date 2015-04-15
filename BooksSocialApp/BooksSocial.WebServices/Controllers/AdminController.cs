@@ -8,7 +8,7 @@
     using BooksSocial.Models;
     using BooksSocial.WebServices.Models.Admin;
 
-    //[Authorize(Roles = "Administrator")]
+    [Authorize(Roles = "Admin")]
     [RoutePrefix("api/admin")]
     public class AdminController : UserController
     {
