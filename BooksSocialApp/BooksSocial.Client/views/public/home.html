@@ -1,1 +1,55 @@
-Hi im home
+<div class="books">
+	<div class="book" ng-repeat="book in books">
+		<div class="book-top-bar">
+			<span class="book-id">
+				<span class="smalltext">Book #</span>{{book.id}}
+			</span>
+				
+				<span class="book-title">
+					<strong>{{book.Title}}</strong> <br> <span class="smalltext" ng-repeat="author in book.authors">
+						<a href="#/authors/{{author}}">{{author}}</a>
+					</span>
+				</span>
+		</div>
+		<div class="book-body">
+			<img class="book-image" ng-src="{{book.CoverImage}}">
+			<span class="book-text"> {{book.Resume}}</span>
+		</div>
+		<div class="book-reviews" >
+			<div class="book-review" ng-repeat="review in book.reviews">
+				
+				<div class="review-detail">
+					{{review.Text}}
+				</div>
+				<div class="user-info">
+					by{{review.User.Username}} posted on {{review.Date | date dd-MMM-YYYY}}
+					<div class="actions" ng-switch on="userRights">
+						<div ng-switch-when="userRights == 'Admin'">
+							<admin-review-actions></admin-actions>
+						</div>
+						<div ng-switch-when="userRights == 'Owner'">
+							<owner-review-actions></owner-actions>
+						</div>
+						<div ng-switch-when="userRights == 'User'">
+							<user-review-actions></user-actions>
+						</div>
+						<div ng-switch-default>
+							<guest-review-actions></guest-review-actions>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div class="book-info">
+			<span class="glyphicon glyphicon-envelope book-email"></span><span class="contact-data">{{book.NumberOfPages}}</span>
+			<span class="glyphicon glyphicon-user book-user"></span><span class="contact-data">{{book.Isbn}}</span>
+		</div>
+	</div>
+	
+	<div class="navigation">
+		<!-- <button class="prev-button btn btn-normal" ng-if='books && currentPage > 1 'ng-click="prevPage()">Previous Page</button>
+
+		<button class="next-button btn btn-normal" ng-if="books && currentPage <= books.numPages-1" ng-click="nextPage()">Next Page</button> -->
+	</div>
+</div>
