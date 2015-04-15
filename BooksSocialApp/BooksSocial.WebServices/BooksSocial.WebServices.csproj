@@ -221,6 +221,7 @@
     <Compile Include="Models\Admin\AdminAuthorBindingModel.cs" />
     <Compile Include="Models\Books\GetBooksBindingModels.cs" />
     <Compile Include="Models\Users\RegisterBindingModel.cs" />
+    <Compile Include="Models\Users\UserShelfBookBindingModel.cs" />
     <Compile Include="Models\Users\UserShelfBindingModel.cs" />
     <Compile Include="Models\Users\UserRatingBindingModel.cs" />
     <Compile Include="Models\Users\UserReviewBindingModel.cs" />

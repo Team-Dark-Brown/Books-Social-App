@@ -1,13 +1,12 @@
-﻿using System;
-using BooksSocial.WebServices.Models.Users;
-
-namespace BooksSocial.WebServices.Controllers
+﻿namespace BooksSocial.WebServices.Controllers
 {
+    using System;
     using System.Linq;
     using System.Web.Http;
 
     using BooksSocial.Data;
     using BooksSocial.Models;
+    using BooksSocial.WebServices.Models.Users;
 
     public class UserController : BaseApiController
     {
@@ -119,6 +118,61 @@ namespace BooksSocial.WebServices.Controllers
             };
 
             Data.Shelf.Add(shelf);
+            Data.SaveChanges();
+            return this.StatusCode(System.Net.HttpStatusCode.Accepted);
+        }
+
+        [HttpPost]
+        [Route("api/users/shelves/{id}")]
+        public IHttpActionResult AddBookToShelf(Guid id, [FromBody] UserShelfBookBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var shelf = Data.Shelf.Find(id);
+            if (shelf == null)
+            {
+                return BadRequest("Shelf not found");
+            }
+
+            var book = Data.Book.Find(model.BookId);
+            if (book == null)
+            {
+                return BadRequest("Book not found");
+            }
+
+            shelf.Books.Add(book);
+            Data.SaveChanges();
+            return this.StatusCode(System.Net.HttpStatusCode.Accepted);
+        }
+
+        [HttpDelete]
+        [Route("api/users/shelves/{id}")]
+        public IHttpActionResult DeleteBookFromShelf(Guid id, [FromBody] UserShelfBookBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var shelf = Data.Shelf.Find(id);
+            if (shelf == null)
+            {
+                return BadRequest("Shelf not found");
+            }
+
+            var sh = shelf.Books;
+            var book = shelf.Books.FirstOrDefault(b => b.Id == model.BookId);
+            if (book == null)
+            {
+                return BadRequest("Book not found");
+            }
+
+            shelf.Books.Remove(book);
+            book.Shelves.Remove(shelf);
+
             Data.SaveChanges();
             return this.StatusCode(System.Net.HttpStatusCode.Accepted);
         }
