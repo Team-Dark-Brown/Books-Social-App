@@ -90,10 +90,13 @@
             var genre = new Genre();
             genre.Name = model.Name;
 
-            foreach (var bookId in model.Books)
+            if (model.Books != null)
             {
-                var book = Data.Book.Find(bookId);
-                genre.Books.Add(book);
+                foreach (var bookId in model.Books)
+                {
+                    var book = Data.Book.Find(bookId);
+                    genre.Books.Add(book);
+                }
             }
 
             Data.Genre.Add(genre);
@@ -129,16 +132,19 @@
             var genre = Data.Genre.Find(id);
             if (genre == null)
             {
-                return Ok("Genre not found");
+                return BadRequest("Genre not found");
             }
 
             genre.Name = model.Name;
-            foreach (var bookId in model.Books)
+            if (model.Books != null)
             {
-                var book = Data.Book.Find(bookId);
-                genre.Books.Add(book);
+                foreach (var bookId in model.Books)
+                {
+                    var book = Data.Book.Find(bookId);
+                    genre.Books.Add(book);
+                }
             }
-
+            
             Data.Genre.Update(genre);
             Data.SaveChanges();
             return Ok("Genre updated successfully.");

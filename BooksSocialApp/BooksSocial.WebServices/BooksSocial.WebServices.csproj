@@ -201,6 +201,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
     <Compile Include="Models\Admin\AdminBookBindingModel.cs" />
     <Compile Include="Models\Admin\AdminGenreBindingModel.cs" />
@@ -213,6 +214,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AuthorBindingModels.cs" />
+    <Compile Include="Models\GetGenresBindingModels.cs" />
     <Compile Include="Models\GetReviewsBindingModel.cs" />
     <Compile Include="Models\Users\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
