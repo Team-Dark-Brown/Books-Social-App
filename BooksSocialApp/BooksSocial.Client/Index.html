@@ -1,0 +1,39 @@
+<!doctype html>
+<html ng-app="booksApp">
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>SiteTitle</title>
+
+
+        <script src="node_modules/jquery/dist/jquery.min.js"></script>
+        <script src="node_modules/angular/angular.min.js"></script>
+        <script src="node_modules/angular-route/angular-route.min.js"></script>
+        <script src="node_modules/angular-resource/angular-resource.min.js"></script>
+        <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	
+		<!-- app services -->
+		<script src="js/app.js"></script>
+
+		<script src="js/authenticate.js"></script>
+
+        <!-- public directives -->
+        <script src="directives/public/book-directive.js"></script>
+        <script src="directives/public/top-bar-directive.js"></script>
+        <script src="directives/public/review-directive.js"></script>
+        <script src="directives/public/category-list-directive.js"></script>
+
+        <!-- public controllers -->
+
+        <script src="js/controller/homeCtrl.js"></script>
+
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+		<!-- <script src="js/controllers/controller-name.js"></script> -->
+    </head>
+    <body>
+        <div id="app-view">
+        	<ng-view></ng-view>
+        </div>
+    </body>
+</html>
