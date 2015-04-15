@@ -2,7 +2,6 @@
 {
     using System;
     using System.Linq;
-    using System.Collections.Generic;
     using System.Web.Http;
 
     using BooksSocial.Data;
@@ -37,7 +36,6 @@
             });
 
             return Ok(books);
-
         }
 
         [HttpGet]
@@ -51,6 +49,22 @@
             }
 
             return this.Ok(book);
+        }
+
+        [HttpGet]
+        [Route("api/books/getbyauthor/{id}")]
+        public IHttpActionResult GetBooksByAuthor(Guid id)
+        {
+            var books = Data.Author.All()
+                .Where(a => a.Id == id)
+                .Select(a => a.Books
+                    .Select(b => new
+                    {
+                        Id = b.Id,
+                        Title = b.Title
+                    }));
+
+            return Ok(books);
         }
 
     }
