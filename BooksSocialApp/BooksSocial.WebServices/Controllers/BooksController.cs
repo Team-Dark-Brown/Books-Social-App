@@ -90,5 +90,32 @@
 
             return Ok(books);
         }
+
+        [HttpGet]
+        [Route("api/books/getbookrating/{id}")]
+        public IHttpActionResult GetBookRating(Guid id)
+        {
+            var ratings = Data.Rating.All()
+                .Where(r => r.Book.Id == id);
+            var sum = 0;
+            foreach (var rating in ratings)
+            {
+                sum += rating.Value;
+            }
+            var ratingsCount = ratings.Count();
+
+            var bookRating = sum/(double)ratingsCount;
+
+            return Ok(bookRating);
+        }
+
+        [HttpGet]
+        [Route("api/books/getbookvotes/{id}")]
+        public IHttpActionResult GetBookRatingsCount(Guid id)
+        {
+            var ratingsCount = Data.Rating.All().Count(r => r.Book.Id == id);
+
+            return Ok(ratingsCount);
+        }
     }
 }
