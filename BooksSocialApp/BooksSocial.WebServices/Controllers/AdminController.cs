@@ -262,6 +262,8 @@
                 }
             }
 
+            book.NumberOfPages = model.NumberOfPages;
+
             Data.Book.Update(book);
             Data.SaveChanges();
             return Ok("The book is updated successfully.");

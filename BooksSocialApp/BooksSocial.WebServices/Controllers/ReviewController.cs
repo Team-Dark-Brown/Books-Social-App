@@ -49,5 +49,40 @@
             return this.Ok(review);
         }
 
+        [HttpGet]
+        [Route("api/reviews/getreviewsbybook/{id}")]
+        public IHttpActionResult GetReviewsByBook(Guid id, [FromUri]GetReviewsBindingModel model)
+        {
+            var reviews = Data.Book.All()
+                .Where(b => b.Id == id)
+                .Select(b => b.Reviews
+                    .Select(r => new
+                    {
+                        Id = r.Id,
+                        Text = r.Text,
+                        CreatedOn = r.CreatedOn,
+                        BookId = r.Book.Id,
+                        UserId = r.User.Id.ToString()
+                    }));
+
+            return this.Ok(reviews);
+        }
+
+        [HttpGet]
+        [Route("api/reviews/getreviewsbyuser/{id}")]
+        public IHttpActionResult GetReviewsByUser(Guid id, [FromUri]GetReviewsBindingModel model)
+        {
+            var reviews = Data.Review.All()
+                .Where(r => r.User.Id == id.ToString())
+                .Select(r => new
+                    {
+                        Id = r.Id,
+                        Text = r.Text,
+                        CreatedOn = r.CreatedOn,
+                        BookId = r.Book.Id
+                    });
+
+            return this.Ok(reviews);
+        }
     }
 }
