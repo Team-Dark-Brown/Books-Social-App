@@ -18,7 +18,6 @@
         [Required]
         public string Name { get; set; }
 
-        [Required]
         public ICollection<Book> Books { get; set; }
 
         [Required]

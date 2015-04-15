@@ -42,7 +42,7 @@
 
         [HttpGet]
         [Route("api/books/{id}")]
-        public IHttpActionResult GetBooksById(Guid id)
+        public IHttpActionResult GetBookById(Guid id)
         {
             var book = Data.Book.Find(id);
             if (book == null)
