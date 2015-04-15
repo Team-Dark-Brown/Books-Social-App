@@ -63,5 +63,64 @@ namespace BooksSocial.WebServices.Controllers
             return this.StatusCode(System.Net.HttpStatusCode.Accepted);
         }
 
+        [HttpPost]
+        [Route("api/users/ratings")]
+        public IHttpActionResult AddRating([FromBody]UserRatingBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = Data.User.All().FirstOrDefault(u => u.Id == model.UserId.ToString());
+            if (user == null)
+            {
+                return BadRequest("User not found.");
+            }
+
+            var book = Data.Book.All().FirstOrDefault(b => b.Id == model.BookId);
+            if (book == null)
+            {
+                return BadRequest("Book not found.");
+            }
+
+            var rating = new Rating()
+            {
+                Book = book,
+                User = user,
+                CreatedOn = DateTime.Now,
+                Value = model.Value
+            };
+
+            Data.Rating.Add(rating);
+            Data.SaveChanges();
+            return this.StatusCode(System.Net.HttpStatusCode.Accepted);
+        }
+
+        [HttpPost]
+        [Route("api/users/shelves")]
+        public IHttpActionResult AddShelf([FromBody]UserShelfBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = Data.User.All().FirstOrDefault(u => u.Id == model.UserId.ToString());
+            if (user == null)
+            {
+                return BadRequest("User not found.");
+            }
+
+            var shelf = new Shelf()
+            {
+                User = user,
+                Name = model.Name
+            };
+
+            Data.Shelf.Add(shelf);
+            Data.SaveChanges();
+            return this.StatusCode(System.Net.HttpStatusCode.Accepted);
+        }
     }
 }
