@@ -122,6 +122,43 @@
             return this.StatusCode(System.Net.HttpStatusCode.Accepted);
         }
 
+        [HttpPut]
+        [Route("api/users/shelves/{id}")]
+        public IHttpActionResult UpdateShelf(Guid id, [FromBody]UserUpdateShelfBindingModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var shelf = Data.Shelf.Find(id);
+            if (shelf == null)
+            {
+                return BadRequest("Shelf not found.");
+            }
+
+            shelf.Name = model.Name;
+
+            Data.Shelf.Update(shelf);
+            Data.SaveChanges();
+            return Ok("Shelf updated successfully.");
+        }
+
+        [HttpDelete]
+        [Route("api/users/shelves/{id}")]
+        public IHttpActionResult DeleteShelf(Guid id)
+        {
+            var shelf = Data.Shelf.Find(id);
+            if (shelf == null)
+            {
+                return BadRequest("Shelf not found.");
+            }
+
+            Data.Shelf.Delete(shelf);
+            Data.SaveChanges();
+            return Ok("Shelf deleted successfully.");
+        }
+
         [HttpPost]
         [Route("api/users/shelves/{id}")]
         public IHttpActionResult AddBookToShelf(Guid id, [FromBody] UserShelfBookBindingModel model)
@@ -149,7 +186,7 @@
         }
 
         [HttpDelete]
-        [Route("api/users/shelves/{id}")]
+        [Route("api/users/shelves/deletebook/{id}")]
         public IHttpActionResult DeleteBookFromShelf(Guid id, [FromBody] UserShelfBookBindingModel model)
         {
             if (!ModelState.IsValid)
@@ -163,7 +200,6 @@
                 return BadRequest("Shelf not found");
             }
 
-            var sh = shelf.Books;
             var book = shelf.Books.FirstOrDefault(b => b.Id == model.BookId);
             if (book == null)
             {

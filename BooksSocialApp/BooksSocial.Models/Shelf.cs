@@ -20,7 +20,6 @@
 
         public virtual ICollection<Book> Books { get; set; }
 
-        [Required]
         public virtual User User { get; set; }
 
     }
