@@ -203,6 +203,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\GenresController.cs" />
     <Compile Include="Controllers\ReviewController.cs" />
+    <Compile Include="Controllers\ShelfController.cs" />
     <Compile Include="Models\Admin\AdminBookBindingModel.cs" />
     <Compile Include="Models\Admin\AdminGenreBindingModel.cs" />
     <Compile Include="Controllers\BaseApiController.cs" />
@@ -214,6 +215,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AuthorBindingModels.cs" />
+    <Compile Include="Models\Books\BooksBindingModel.cs" />
+    <Compile Include="Models\GetShelvesBindingModels.cs" />
     <Compile Include="Models\GetGenresBindingModels.cs" />
     <Compile Include="Models\GetReviewsBindingModel.cs" />
     <Compile Include="Models\Users\AccountBindingModels.cs" />
