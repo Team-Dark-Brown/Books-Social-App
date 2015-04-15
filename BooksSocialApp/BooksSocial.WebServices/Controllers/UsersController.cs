@@ -1,4 +1,8 @@
-﻿namespace BooksSocial.WebServices.Controllers
+﻿using System.Web;
+using BooksSocial.WebServices.Models;
+using Microsoft.AspNet.Identity;
+
+namespace BooksSocial.WebServices.Controllers
 {
     using System;
     using System.Linq;
@@ -37,7 +41,8 @@
                 return BadRequest(ModelState);
             }
 
-            var user = Data.User.All().FirstOrDefault(u => u.Id == model.UserId.ToString());
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            var user = Data.User.All().FirstOrDefault(u => u.Id == userId);
             if (user == null)
             {
                 return BadRequest("User not found.");
@@ -62,6 +67,25 @@
             return this.StatusCode(System.Net.HttpStatusCode.Accepted);
         }
 
+        [HttpGet]
+        [Route("api/users/reviews")]
+        public IHttpActionResult GetReviewsByUser([FromUri]GetReviewsBindingModel model)
+        {
+            var id = HttpContext.Current.User.Identity.GetUserId();
+
+            var reviews = Data.Review.All()
+                .Where(r => r.User.Id == id)
+                .Select(r => new
+                {
+                    Id = r.Id,
+                    Text = r.Text,
+                    CreatedOn = r.CreatedOn,
+                    BookId = r.Book.Id
+                }).ToList();
+
+            return this.Ok(reviews);
+        }
+
         [HttpPost]
         [Route("api/users/ratings")]
         public IHttpActionResult AddRating([FromBody]UserRatingBindingModel model)
@@ -71,7 +95,8 @@
                 return BadRequest(ModelState);
             }
 
-            var user = Data.User.All().FirstOrDefault(u => u.Id == model.UserId.ToString());
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            var user = Data.User.All().FirstOrDefault(u => u.Id == userId);
             if (user == null)
             {
                 return BadRequest("User not found.");
@@ -105,7 +130,8 @@
                 return BadRequest(ModelState);
             }
 
-            var user = Data.User.All().FirstOrDefault(u => u.Id == model.UserId.ToString());
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            var user = Data.User.All().FirstOrDefault(u => u.Id == userId);
             if (user == null)
             {
                 return BadRequest("User not found.");
@@ -209,6 +235,21 @@
             shelf.Books.Remove(book);
             book.Shelves.Remove(shelf);
 
+            Data.SaveChanges();
+            return this.StatusCode(System.Net.HttpStatusCode.Accepted);
+        }
+
+        [HttpPost]
+        [Route("api/users/requests/{id}")]
+        public IHttpActionResult CreateFriendRequest(Guid id)
+        {
+            var request = new FriendRequest()
+            {
+                Sender = CurrentUser,
+                Receiver = Data.User.All().FirstOrDefault(u => u.Id == id.ToString())
+            };
+
+            Data.FriendRequest.Add(request);
             Data.SaveChanges();
             return this.StatusCode(System.Net.HttpStatusCode.Accepted);
         }
