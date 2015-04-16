@@ -1,15 +1,15 @@
-﻿using System.Web;
-using BooksSocial.WebServices.Models;
-using Microsoft.AspNet.Identity;
-
-namespace BooksSocial.WebServices.Controllers
+﻿namespace BooksSocial.WebServices.Controllers
 {
     using System;
     using System.Linq;
+    using System.Web;
     using System.Web.Http;
+
+    using Microsoft.AspNet.Identity;
 
     using BooksSocial.Data;
     using BooksSocial.Models;
+    using BooksSocial.WebServices.Models;
     using BooksSocial.WebServices.Models.Users;
 
     public class UserController : BaseApiController

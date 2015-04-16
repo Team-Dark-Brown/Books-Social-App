@@ -2,7 +2,10 @@
 {
     using System;
     using System.Linq;
+    using System.Web;
     using System.Web.Http;
+
+    using Microsoft.AspNet.Identity;
 
     using BooksSocial.Data;
 
@@ -18,11 +21,13 @@
         }
 
         [HttpGet]
-        [Route("api/shelves/getshelvesbyuser/{id}")]
-        public IHttpActionResult GetShelvesByUserId(Guid id)
+        [Route("api/shelves/getshelvesbyuser")]
+        public IHttpActionResult GetShelvesByUserId()
         {
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+
             var shelves = Data.Shelf.All()
-                .Where(s => s.User.Id == id.ToString())
+                .Where(s => s.User.Id == userId.ToString())
                 .Select(s => new
                 {
                     Id = s.Id,
