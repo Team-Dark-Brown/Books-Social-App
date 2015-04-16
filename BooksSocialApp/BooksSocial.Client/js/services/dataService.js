@@ -1,7 +1,7 @@
 app.service('DataService', ['$http', 'baseServiceUrl', function($http, baseServiceUrl){
 	this.getAllBooks = function(callback){
 		var requestObject = {
-			url: baseServiceUrl + '/books/',
+			url: baseServiceUrl + '/api/books/',
 			method: 'GET'
 		};
 		$http(requestObject).then(function(callback){
@@ -10,7 +10,7 @@ app.service('DataService', ['$http', 'baseServiceUrl', function($http, baseServi
 	};
 	this.getUserShelves = function(callback, userID){
 		var requestObject = {
-			url: baseServiceUrl + '/shelves/getshelvesbyuser/' + userID,
+			url: baseServiceUrl + '/api/shelves/getshelvesbyuser/' + userID,
 			method: 'GET'
 		};
 		$http(requestObject).then(function(callback){
@@ -19,7 +19,7 @@ app.service('DataService', ['$http', 'baseServiceUrl', function($http, baseServi
 	};
 	this.getBookReviews = function(callback, bookID){
 		var requestObject = {
-			url: baseServiceUrl + '/reviews/getreviewsbybook/' + 'BookID=' + bookID,
+			url: baseServiceUrl + '/api/reviews/getreviewsbybook/' + 'BookID=' + bookID,
 			method: 'GET'
 		};
 		$http(requestObject).then(function(callback){
@@ -28,7 +28,7 @@ app.service('DataService', ['$http', 'baseServiceUrl', function($http, baseServi
 	};
 	this.addBookReview = function(callback, bookID, userID){
 		var requestObject = {
-			url: baseServiceUrl + '/users/reviews',
+			url: baseServiceUrl + '/api/users/reviews',
 			method: 'Post',
 			data: {
 				BookId: bookID,
@@ -41,7 +41,7 @@ app.service('DataService', ['$http', 'baseServiceUrl', function($http, baseServi
 	};
 	this.addBook = function(callback, title, resume, isbn, pagecount, coverimage, authors, genres){
 		var requestObject = {
-			url: baseServiceUrl + '/admin/books',
+			url: baseServiceUrl + '/api/admin/books',
 			method: 'POST',
 			data: {
 				Title: title,
@@ -59,7 +59,7 @@ app.service('DataService', ['$http', 'baseServiceUrl', function($http, baseServi
 	};
 	this.addGenre = function(callback, genreName){
 		var requestObject = {
-			url: baseServiceUrl + '/admin/genres',
+			url: baseServiceUrl + '/api/admin/genres',
 			method: 'POST',
 			data: {
 				Name: genreName,
@@ -71,7 +71,7 @@ app.service('DataService', ['$http', 'baseServiceUrl', function($http, baseServi
 	};
 	this.addAuthor = function(callback, firstName, lastName, picture, website, information){
 		var requestObject = {
-			url: baseServiceUrl + '/admin/authors',
+			url: baseServiceUrl + '/api/admin/authors',
 			method: 'POST',
 			data: {
 				FirstName: firstName,
@@ -87,7 +87,7 @@ app.service('DataService', ['$http', 'baseServiceUrl', function($http, baseServi
 	};
 	this.addUserShelf = function(callback, shelfName, UserId){
 		var requestObject = {
-			url: baseServiceUrl + '/users/shelves',
+			url: baseServiceUrl + '/api/users/shelves',
 			method: 'POST',
 			data: {
 				Name: shelfName,
@@ -101,7 +101,7 @@ app.service('DataService', ['$http', 'baseServiceUrl', function($http, baseServi
 
 	this.addBookToShelf = function(callback, shelfId, bookId){
 		var requestObject = {
-			url: baseServiceUrl + '/users/shelves/' + shelfId,
+			url: baseServiceUrl + '/api/users/shelves/' + shelfId,
 			method: 'PUT',
 			data: {
 				BookId: BookId
@@ -114,7 +114,7 @@ app.service('DataService', ['$http', 'baseServiceUrl', function($http, baseServi
 
 	this.removeBookFromShelf = function(callback, shelfId, bookId){
 		var requestObject = {
-			url: baseServiceUrl + '/users/shelves/deletebook/' + shelfId,
+			url: baseServiceUrl + '/api/users/shelves/deletebook/' + shelfId,
 			method: 'DELETE',
 			data: {
 				BookId: BookId
@@ -127,7 +127,7 @@ app.service('DataService', ['$http', 'baseServiceUrl', function($http, baseServi
 
 	this.removeShelf = function(callback, shelfId){
 		var requestObject = {
-			url: baseServiceUrl + '/users/shelves/' + shelfId,
+			url: baseServiceUrl + '/api/users/shelves/' + shelfId,
 			method: 'DELETE'
 		};
 		$http(requestObject).then(function(callback){
@@ -137,7 +137,7 @@ app.service('DataService', ['$http', 'baseServiceUrl', function($http, baseServi
 
 	this.editBook = function(callback, bookId, title, resume, isbn, pagecount, coverimage, authors, genres){
 		var requestObject = {
-			url: baseServiceUrl + '/admin/Books/' + bookId,
+			url: baseServiceUrl + '/api/admin/Books/' + bookId,
 			method: 'PUT',
 			data: {
 				Title: title,
@@ -155,7 +155,7 @@ app.service('DataService', ['$http', 'baseServiceUrl', function($http, baseServi
 	};
 	this.editGenre = function(callback, genreId, genreName){
 		var requestObject = {
-			url: baseServiceUrl + '/admin/genres/' + genreId,
+			url: baseServiceUrl + '/api/admin/genres/' + genreId,
 			method: 'PUT',
 			data: {
 				Name: genreName,
@@ -167,7 +167,7 @@ app.service('DataService', ['$http', 'baseServiceUrl', function($http, baseServi
 	};
 	this.editAuthor = function(callback, authorId, firstName, lastName, picture, website, information){
 		var requestObject = {
-			url: baseServiceUrl + '/admin/authors/' + authorId,
+			url: baseServiceUrl + '/api/admin/authors/' + authorId,
 			method: 'PUT',
 			data: {
 				FirstName: firstName,
@@ -184,7 +184,7 @@ app.service('DataService', ['$http', 'baseServiceUrl', function($http, baseServi
 
 	this.removeBook = function(callback, bookId){
 		var requestObject = {
-			url: baseServiceUrl + '/admin/books/' + bookId,
+			url: baseServiceUrl + '/api/admin/books/' + bookId,
 			method: 'DELETE'
 		};
 		$http(requestObject).then(function(callback){
@@ -193,7 +193,7 @@ app.service('DataService', ['$http', 'baseServiceUrl', function($http, baseServi
 	};
 	this.removeGenre = function(callback, genreId){
 		var requestObject = {
-			url: baseServiceUrl + '/admin/genres/' + genreId,
+			url: baseServiceUrl + '/api/admin/genres/' + genreId,
 			method: 'DELETE'
 		};
 		$http(requestObject).then(function(callback){
@@ -202,7 +202,7 @@ app.service('DataService', ['$http', 'baseServiceUrl', function($http, baseServi
 	};
 	this.removeAuthor = function(callback, authorId){
 		var requestObject = {
-			url: baseServiceUrl + '/admin/authors/' + authorId,
+			url: baseServiceUrl + '/api/admin/authors/' + authorId,
 			method: 'DELETE'
 		};
 		$http(requestObject).then(function(callback){

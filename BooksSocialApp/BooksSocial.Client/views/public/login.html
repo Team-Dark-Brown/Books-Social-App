@@ -4,13 +4,13 @@
   <div class="form-group">
     <label for="inputEmail" class="col-lg-2 control-label">Email</label>
     <div class="col-lg-10">
-      <input type="text" class="form-control" id="inputEmail" placeholder="Email">
+      <input type="text" ng-model="username" class="form-control" id="inputEmail" placeholder="Email">
     </div>
   </div>
   <div class="form-group">
     <label for="inputPassword" class="col-lg-2 control-label">Password</label>
     <div class="col-lg-10">
-      <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+      <input type="password" ng-model="loginPassword" class="form-control" id="inputPassword" placeholder="Password">
       <div class="checkbox">
         <label>
           <input type="checkbox"> Checkbox
@@ -19,7 +19,7 @@
     </div>
   </div>
   <div class="actions">
-    <button class="btn btn-primary pull-right">Login</button>
+    <button class="btn btn-primary pull-right" ng-click="login(username, loginPassword)">Login</button>
     <button class="btn pull-right">Back</button>
   </div>
 </fieldset>

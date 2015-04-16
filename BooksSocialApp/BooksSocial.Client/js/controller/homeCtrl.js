@@ -2,14 +2,17 @@ app.controller('homeCtrl', ['$scope', 'AuthenticateService', 'DataService', func
 	$scope.title = "what";
 	$scope.login = function(user, pass){
 		AuthenticateService.login(user,pass);
+		console.log("debug-login");
 	};
 
 	$scope.logout = function(){
 		AuthenticateSerivce.logout();
+		console.log("debug-logout");
 	};
 
-	$scope.register = function(user,email,pass,confirmPass,phone){
-		AuthenticateService.registerUser(user, email, pass, confimPass, phone);
+	$scope.registerUser = function(user, email, pass, confirmPass, phone){
+		AuthenticateService.registerUser(user, email, pass, confirmPass, phone);
+		console.log("debug-register");
 	};
 
 	$scope.getBooks = function(){

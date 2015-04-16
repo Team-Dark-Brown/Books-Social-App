@@ -1,6 +1,6 @@
 var app = angular.module('booksApp', ['ngRoute', 'ngResource']);
 
-app.constant('baseServiceUrl', 'http://bookssocial.azurewebsites.net/api/');
+app.constant('baseServiceUrl', 'http://bookssocial.azurewebsites.net');
 
 app.config(['$routeProvider', '$locationProvider', '$filterProvider', function($routeProvider, $locationProvider, $filterProvider){
     $routeProvider.

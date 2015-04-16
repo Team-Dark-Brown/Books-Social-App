@@ -1,12 +1,12 @@
 app.service('AuthenticateService', ['$http', '$rootScope', 'baseServiceUrl', function($http, $rootScope, baseServiceUrl) {
 
 	this.login = function(user, pass){
-		var loginReq = { "username": user, "password": pass };
-		resource = $http.post(baseServiceUrl + "user/login", loginReq)
+		var loginReq = { "username": user, "password": pass, "grant_type": "password" };
+		resource = $http.post(baseServiceUrl + "/Login", loginReq)
 		.then(function(response){
 			console.log(response);
 			sessionStorage.loginToken = response.data.access_token;
-			sessionStorage.username = response.data.username;
+			sessionStorage.username = response.data.userName;
 			self.broadcastUser();
 		});
 	};
@@ -25,14 +25,14 @@ app.service('AuthenticateService', ['$http', '$rootScope', 'baseServiceUrl', fun
 		});
 	};
 	
-	this.registerUser = function(user, email, pass, confimPass, phone){
+	this.registerUser = function(user, email, pass, confirmPass, phone){
 		var registerReq = { "username": user, 		
 							"email": email, 
 							"password": pass, 
 							"confirmPassword": confirmPass, 
 							"phone":phone
 						};
-		resource = $http.post(baseServiceUrl + "Account/Register", registerReq)
+		resource = $http.post(baseServiceUrl + "/api/Account/Register", registerReq)
 		.then(function(response){
 			sessionStorage.loginToken = response.data.access_token;
 			sessionStorage.username = response.data.username;

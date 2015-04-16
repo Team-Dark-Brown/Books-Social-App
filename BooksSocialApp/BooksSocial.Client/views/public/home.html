@@ -22,7 +22,7 @@
 					{{review.Text}}
 				</div>
 				<div class="user-info">
-					by{{review.User.Username}} posted on {{review.Date | date dd-MMM-YYYY}}
+					by{{review.User.Username}} posted on {{review.Date}}
 					<div class="actions" ng-switch on="userRights">
 						<div ng-switch-when="userRights == 'Admin'">
 							<admin-review-actions></admin-actions>
