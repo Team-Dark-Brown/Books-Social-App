@@ -25,11 +25,35 @@
 
         [HttpGet]
         [Route("api/users")]
-        public IHttpActionResult GetUsersCount()
+        public IHttpActionResult GetAllUsers()
         {
-            var count = this.Data.User.All().Count();
+            var users = Data.User.All()
+                .Select(u => new
+                {
+                    Id = u.Id,
+                    Username = u.UserName,
+                    Phone = u.PhoneNumber,
+                    ProfilePicture = u.ProfileImage
+                });
 
-            return this.Ok(count);
+            return this.Ok(users);
+        }
+
+        [HttpGet]
+        [Route("api/users/{id}")]
+        public IHttpActionResult GetUserById(Guid id)
+        {
+            var user = Data.User.All()
+                .Where(u => u.Id == id.ToString())
+                .Select(u => new
+                {
+                    Id = u.Id,
+                    Username = u.UserName,
+                    Phone = u.PhoneNumber,
+                    ProfilePicture = u.ProfileImage
+                });
+
+            return this.Ok(user);
         }
 
         [HttpPost]
