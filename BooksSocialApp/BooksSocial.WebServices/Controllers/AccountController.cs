@@ -322,9 +322,11 @@ namespace BooksSocial.WebServices.Controllers
 
         // POST api/Account/Register
         [AllowAnonymous]
+        [AcceptVerbs("POST","OPTIONS")]
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
+            
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
