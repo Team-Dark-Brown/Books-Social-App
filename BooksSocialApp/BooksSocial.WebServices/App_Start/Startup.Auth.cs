@@ -11,7 +11,7 @@ using Microsoft.Owin.Security.OAuth;
 using Owin;
 using BooksSocial.WebServices.Providers;
 using BooksSocial.WebServices.Models;
-
+using Microsoft.Owin.Cors;
 namespace BooksSocial.WebServices
 {
     public partial class Startup
@@ -23,6 +23,7 @@ namespace BooksSocial.WebServices
         // For more information on configuring authentication, please visit http://go.microsoft.com/fwlink/?LinkId=301864
         public void ConfigureAuth(IAppBuilder app)
         {
+            app.UseCors(CorsOptions.AllowAll);
             // Configure the db context and user manager to use a single instance per request
             app.CreatePerOwinContext(BooksSocialDbContext.Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);

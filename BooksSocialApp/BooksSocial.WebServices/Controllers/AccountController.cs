@@ -18,11 +18,12 @@ using BooksSocial.WebServices.Models;
 using BooksSocial.WebServices.Models.Users;
 using BooksSocial.WebServices.Providers;
 using BooksSocial.WebServices.Results;
-
+using System.Web.Http.Cors;
 namespace BooksSocial.WebServices.Controllers
 {
     [Authorize]
     [RoutePrefix("api/Account")]
+    [EnableCors(origins: "http://booksdigest.azurewebsites.net", headers: "*", methods: "*")]
     public class AccountController : ApiController
     {
         private const string LocalLoginProvider = "Local";
@@ -322,7 +323,7 @@ namespace BooksSocial.WebServices.Controllers
 
         // POST api/Account/Register
         [AllowAnonymous]
-        [AcceptVerbs("POST","OPTIONS")]
+        [HttpPost]
         [Route("Register")]
         public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {

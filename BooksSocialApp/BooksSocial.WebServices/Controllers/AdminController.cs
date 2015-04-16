@@ -58,7 +58,12 @@
             Data.SaveChanges();
             return Ok("The author is deleted successfully.");
         }
-
+        [HttpGet]
+        [Route("Authors")]
+        public IHttpActionResult GetAllAuthors()
+        {
+            return Ok(Data.Author.All().ToList());
+        }
         [HttpPut]
         [Route("Authors/{id}")]
         public IHttpActionResult UpdateAuthor(Guid id, [FromBody]AdminAuthorBindingModel model)
@@ -78,6 +83,13 @@
             Data.Author.Update(author);
             Data.SaveChanges();
             return Ok("The author is updated successfully.");
+        }
+
+        [HttpGet]
+        [Route("Genres")]
+        public IHttpActionResult GetAllGenres()
+        {
+            return Ok(Data.Genre.All().ToList());
         }
 
         [HttpPost]

@@ -15,11 +15,9 @@ namespace BooksSocial.WebServices
     {
         public void Configuration(IAppBuilder app)
         {
-            HttpConfiguration config = new HttpConfiguration();
+            
             ConfigureAuth(app);
-            WebApiConfig.Register(config);
-            app.UseCors(CorsOptions.AllowAll);
-            app.UseWebApi(config);
+            
         }
     }
 }
