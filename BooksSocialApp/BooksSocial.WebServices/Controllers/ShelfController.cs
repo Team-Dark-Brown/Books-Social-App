@@ -22,7 +22,7 @@
 
         [HttpGet]
         [Route("api/shelves/getshelvesbyuser")]
-        public IHttpActionResult GetShelvesByUserId()
+        public IHttpActionResult GetShelvesByUser()
         {
             var userId = HttpContext.Current.User.Identity.GetUserId();
 

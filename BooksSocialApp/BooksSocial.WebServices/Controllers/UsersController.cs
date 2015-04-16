@@ -25,11 +25,35 @@
 
         [HttpGet]
         [Route("api/users")]
-        public IHttpActionResult GetUsersCount()
+        public IHttpActionResult GetAllUsers()
         {
-            var count = this.Data.User.All().Count();
+            var users = Data.User.All()
+                .Select(u => new
+                {
+                    Id = u.Id,
+                    Username = u.UserName,
+                    Phone = u.PhoneNumber,
+                    ProfilePicture = u.ProfileImage
+                });
 
-            return this.Ok(count);
+            return this.Ok(users);
+        }
+
+        [HttpGet]
+        [Route("api/users/{id}")]
+        public IHttpActionResult GetUserById(Guid id)
+        {
+            var user = Data.User.All()
+                .Where(u => u.Id == id.ToString())
+                .Select(u => new
+                {
+                    Id = u.Id,
+                    Username = u.UserName,
+                    Phone = u.PhoneNumber,
+                    ProfilePicture = u.ProfileImage
+                });
+
+            return this.Ok(user);
         }
 
         [HttpPost]
@@ -254,5 +278,54 @@
             return this.StatusCode(System.Net.HttpStatusCode.Accepted);
         }
 
+        [HttpGet]
+        [Route("api/users/requests")]
+        public IHttpActionResult GetFriendRequests()
+        {
+            var id = HttpContext.Current.User.Identity.GetUserId();
+
+            var requests = Data.FriendRequest.All()
+                .Where(r => r.Receiver.Id == id)
+                .Select(r => new
+                {
+                    Id = r.Id,
+                    Sender = r.Sender.Id
+                });
+
+            return Ok(requests);
+        }
+
+        [HttpPost]
+        [Route("api/users/friends/{id}")]
+        public IHttpActionResult AddFriend(Guid id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var userId = HttpContext.Current.User.Identity.GetUserId();
+            var friend = Data.User.All().FirstOrDefault(u => u.Id == id.ToString());
+
+            if (friend == null)
+            {
+                return BadRequest("Friend request sender not found");
+            }
+
+            var user = Data.User.All().FirstOrDefault(u => u.Id == userId);
+            if (user == null)
+            {
+                return BadRequest("User not found");
+            }
+
+            var request = Data.FriendRequest.All()
+                .FirstOrDefault(fr => fr.Sender.Id == id.ToString() && fr.Receiver.Id == userId);
+
+            user.Friends.Add(friend);
+            friend.Friends.Add(user);
+            Data.FriendRequest.Delete(request);
+            Data.SaveChanges();
+            return this.StatusCode(System.Net.HttpStatusCode.Accepted);
+        }
     }
 }
